@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voto de la Moraleja - Estética Vintage</title>
+    
+    <!-- Importando tipografías elegantes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           PALETA DE COLORES Y VARIABLES
+           ========================================= */
+        :root {
+            --blanco-roto: #FAF8F5;
+            --crema: #F1EADC;
+            --beige: #E6DFD1;
+            --marron-suave: #A68A64;
+            --dorado-opaco: #C5A880;
+            --verde-oliva: #6B705C;
+            --negro-tinta: #2C2A29;
+            --sombra-ligera: rgba(44, 42, 41, 0.08);
+            
+            --fuente-titulos: 'Playfair Display', serif;
+            --fuente-cuerpo: 'Lora', serif;
+        }
+
+        /* =========================================
+           ESTILOS GENERALES
+           ========================================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--beige);
+            font-family: var(--fuente-cuerpo);
+            color: var(--negro-tinta);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        /* =========================================
+           CONTENEDOR PRINCIPAL (TARJETA EDITORIAL)
+           ========================================= */
+        .seccion-vintage {
+            background-color: var(--blanco-roto);
+            max-width: 850px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px var(--sombra-ligera), 0 5px 15px rgba(0,0,0,0.03);
+            /* Doble borde clásico */
+            border: 1px solid var(--marron-suave);
+            outline: 2px solid var(--dorado-opaco);
+            outline-offset: -8px;
+            padding: 3rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .seccion-vintage:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px var(--sombra-ligera), 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        /* Decoración de esquinas vintage */
+        .decoracion-esquina {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--marron-suave);
+            opacity: 0.6;
+        }
+        .esquina-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+        .esquina-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+        .esquina-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+        .esquina-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+        /* =========================================
+           CABECERA Y TEXTOS
+           ========================================= */
+        .cabecera-editorial {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .adorno-floral {
+            color: var(--dorado-opaco);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 5px;
+            user-select: none;
+        }
+
+        .titulo-principal {
+            font-family: var(--fuente-titulos);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--negro-tinta);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+
+        .explicacion-actividad {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a4745;
+            max-width: 650px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* =========================================
+           ZONA INTERACTIVA (GRID)
+           ========================================= */
+        .zona-interactiva {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+            border-top: 1px dashed var(--marron-suave);
+            padding-top: 2.5rem;
+        }
+
+        /* ----- Lado Izquierdo: Voto Rápido ----- */
+        .bloque-voto {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .pregunta-voto {
+            font-family: var(--fuente-titulos);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--negro-tinta);
+            border-left: 4px solid var(--verde-oliva);
+            padding-left: 1rem;
+        }
+
+        .botones-voto {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-elegante {
+            font-family: var(--fuente-cuerpo);
+            background-color: transparent;
+            color: var(--negro-tinta);
+            border: 1px solid var(--marron-suave);
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        /* Efecto hover llenando el botón */
+        .btn-elegante::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--verde-oliva);
+            z-index: -1;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-elegante:hover::before {
+            transform: scaleY(1);
+        }
+
+        .btn-elegante:hover {
+            color: var(--blanco-roto);
+            border-color: var(--verde-oliva);
+        }
+
+        .mensaje-agradecimiento {
+            display: none;
+            color: var(--verde-oliva);
+            font-style: italic;
+            font-size: 0.95rem;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* ----- Lado Derecho: Código QR ----- */
+        .bloque-qr {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .marco-qr {
+            background-color: var(--blanco-roto);
+            padding: 1rem;
+            border: 2px solid var(--dorado-opaco);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--sombra-ligera);
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .marco-qr:hover {
+            transform: scale(1.05);
+        }
+
+        /* Falso código QR dibujado con CSS/SVG para ilustrar */
+        .imagen-qr {
+            width: 140px;
+            height: 140px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .imagen-qr svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--negro-tinta);
+        }
+
+        .texto-apoyo-qr {
+            font-size: 0.9rem;
+            color: #555;
+            max-width: 250px;
+        }
+
+        .texto-apoyo-qr strong {
+            color: var(--marron-suave);
+            font-family: var(--fuente-titulos);
+        }
+
+        /* =========================================
+           ANIMACIONES Y RESPONSIVE
+           ========================================= */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Adaptación para dispositivos móviles */
+        @media (max-width: 768px) {
+            .zona-interactiva {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            .titulo-principal {
+                font-size: 2rem;
+            }
+            
+            .seccion-vintage {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .bloque-qr {
+                border-top: 1px dotted var(--marron-suave);
+                padding-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <section class="seccion-vintage">
+        <!-- Elementos decorativos en las esquinas -->
+        <div class="decoracion-esquina esquina-tl"></div>
+        <div class="decoracion-esquina esquina-tr"></div>
+        <div class="decoracion-esquina esquina-bl"></div>
+        <div class="decoracion-esquina esquina-br"></div>
+
+        <!-- Cabecera -->
+        <header class="cabecera-editorial">
+            <div class="adorno-floral">~ ✧ ~</div>
+            <h2 class="titulo-principal">El Juicio del Tiempo:<br>La Moraleja a Debate</h2>
+            <p class="explicacion-actividad">
+                Toda fábula encierra una verdad que busca trascender, pero ¿soporta verdaderamente el paso de los siglos? Te invitamos a reflexionar sobre la enseñanza de esta historia. Analiza sus palabras y ayúdanos a decidir el veredicto final.
+            </p>
+        </header>
+
+        <!-- Zona de Interactividad -->
+        <div class="zona-interactiva">
+            
+            <!-- Columna Izquierda: Mini Encuesta en vivo -->
+            <div class="bloque-voto">
+                <h3 class="pregunta-voto">¿Consideras que esta moraleja sigue siendo aplicable en nuestra sociedad actual?</h3>
+                <div class="botones-voto" id="contenedor-botones">
+                    <button class="btn-elegante" onclick="registrarVoto('si')">Sí, es atemporal</button>
+                    <button class="btn-elegante" onclick="registrarVoto('no')">No, ha caducado</button>
+                </div>
+                <!-- Mensaje que aparece tras votar -->
+                <p class="mensaje-agradecimiento" id="mensaje-gracias">
+                    ¡Gracias por tu perspectiva! Tu voto ha quedado registrado en los archivos del tiempo.
+                </p>
+            </div>
+
+            <!-- Columna Derecha: Código QR -->
+            <div class="bloque-qr">
+                <div class="marco-qr">
+                    <div class="imagen-qr">
+                        <!-- SVG simulando un código QR elegante. 
+                             Para producción, reemplaza este SVG por una etiqueta <img> con tu QR real -->
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="10" y="10" width="25" height="25" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <rect x="15" y="15" width="15" height="15"/>
+                            <rect x="65" y="10" width="25" height="25" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <rect x="70" y="15" width="15" height="15"/>
+                            <rect x="10" y="65" width="25" height="25" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <rect x="15" y="70" width="15" height="15"/>
+                            <rect x="45" y="10" width="10" height="10"/>
+                            <rect x="45" y="25" width="10" height="10"/>
+                            <rect x="10" y="45" width="10" height="10"/>
+                            <rect x="25" y="45" width="10" height="10"/>
+                            <rect x="40" y="45" width="20" height="20"/>
+                            <rect x="65" y="45" width="10" height="10"/>
+                            <rect x="80" y="45" width="10" height="10"/>
+                            <rect x="45" y="70" width="10" height="10"/>
+                            <rect x="45" y="85" width="10" height="10"/>
+                            <rect x="60" y="65" width="30" height="10"/>
+                            <rect x="60" y="80" width="10" height="10"/>
+                            <rect x="80" y="80" width="10" height="10"/>
+                        </svg>
+                    </div>
+                </div>
+                <p class="texto-apoyo-qr">
+                    <strong>Veredicto Completo:</strong> Escanea el sello para participar en nuestra encuesta extendida y dejar tu opinión detallada.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LOGICA JAVASCRIPT -->
+    <script>
+        /**
+         * Función sencilla para simular la interacción del voto
+         * Oculta los botones y muestra un mensaje de agradecimiento clásico.
+         */
+        function registrarVoto(respuesta) {
+            const contenedorBotones = document.getElementById('contenedor-botones');
+            const mensajeGracias = document.getElementById('mensaje-gracias');
+
+            // Efecto visual: desvanecer botones
+            contenedorBotones.style.opacity = '0';
+            contenedorBotones.style.transition = 'opacity 0.4s ease';
+
+            setTimeout(() => {
+                contenedorBotones.style.display = 'none';
+                
+                // Si deseas enviar los datos a algún lugar, aquí podrías añadir lógica fetch/AJAX
+                // console.log("El usuario votó:", respuesta);
+                
+                // Mostrar el mensaje
+                mensajeGracias.style.display = 'block';
+            }, 400);
+        }
+    </script>
+
+</body>
+</html>
