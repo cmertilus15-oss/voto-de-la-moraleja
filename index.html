@@ -3,34 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voto de la Moraleja - Estética Vintage</title>
+    <title>Ecos de Papel | Fábulas clásicas con esencia vintage</title>
     
-    <!-- Importando tipografías elegantes de Google Fonts -->
+    <!-- Fuentes de Google: Playfair Display para títulos, Lora para cuerpo de texto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome para íconos vintage y estéticos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* =========================================
-           PALETA DE COLORES Y VARIABLES
-           ========================================= */
+        /* ==========================================
+           VARIABLES DE COLOR Y ESTILO VINTAGE
+           ========================================== */
         :root {
-            --blanco-roto: #FAF8F5;
-            --crema: #F1EADC;
-            --beige: #E6DFD1;
-            --marron-suave: #A68A64;
-            --dorado-opaco: #C5A880;
-            --verde-oliva: #6B705C;
-            --negro-tinta: #2C2A29;
-            --sombra-ligera: rgba(44, 42, 41, 0.08);
+            --color-bg-main: #f0ebe1; /* Crema papel antiguo */
+            --color-bg-card: #fdfbf7; /* Blanco pergamino claro */
+            --color-text-main: #2b2721; /* Tinta sepia oscura */
+            --color-text-muted: #6e6459; /* Tinta desgastada */
+            --color-accent-gold: #c29b57; /* Dorado opaco / Bronce */
+            --color-accent-gold-hover: #a88548;
+            --color-accent-green: #5c634f; /* Verde oliva oscuro */
+            --color-accent-green-hover: #4a503f;
+            --color-border: #d4c8b8; /* Beige oscuro */
+            --color-border-light: #e8e0d5;
             
-            --fuente-titulos: 'Playfair Display', serif;
-            --fuente-cuerpo: 'Lora', serif;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lora', serif;
+            
+            --shadow-delicate: 0 10px 30px rgba(43, 39, 33, 0.08);
+            --shadow-hover: 0 15px 35px rgba(194, 155, 87, 0.15);
+            --border-radius: 16px;
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* =========================================
-           ESTILOS GENERALES
-           ========================================= */
+        /* ==========================================
+           RESET Y ESTILOS GLOBALES
+           ========================================== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -38,348 +48,786 @@
         }
 
         body {
-            background-color: var(--beige);
-            font-family: var(--fuente-cuerpo);
-            color: var(--negro-tinta);
+            font-family: var(--font-body);
+            background-color: var(--color-bg-main);
+            color: var(--color-text-main);
+            line-height: 1.7;
+            /* Textura sutil de papel de fondo */
+            background-image: 
+                radial-gradient(var(--color-border) 1px, transparent 1px),
+                linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.2) 75%, rgba(255,255,255,0.2));
+            background-size: 30px 30px, 60px 60px;
+            background-position: -14px -14px, 0 0;
+            padding: 3rem 1rem;
             display: flex;
             justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 2rem 1rem;
         }
 
-        /* =========================================
-           CONTENEDOR PRINCIPAL (TARJETA EDITORIAL)
-           ========================================= */
-        .seccion-vintage {
-            background-color: var(--blanco-roto);
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--color-text-main);
+        }
+
+        /* ==========================================
+           CONTENEDOR PRINCIPAL (ESTILO LIBRO ANTIGUO)
+           ========================================== */
+        .editorial-container {
             max-width: 850px;
             width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 15px 35px var(--sombra-ligera), 0 5px 15px rgba(0,0,0,0.03);
-            /* Doble borde clásico */
-            border: 1px solid var(--marron-suave);
-            outline: 2px solid var(--dorado-opaco);
-            outline-offset: -8px;
-            padding: 3rem 2.5rem;
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 4px; /* Bordes menos redondeados para simular páginas */
+            box-shadow: var(--shadow-delicate);
+            padding: 4rem;
             position: relative;
-            overflow: hidden;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            /* Marco interior vintage */
+            outline: 2px solid var(--color-accent-gold);
+            outline-offset: -12px;
+            animation: fadeIn 1s ease-out;
         }
 
-        .seccion-vintage:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px var(--sombra-ligera), 0 8px 20px rgba(0,0,0,0.05);
-        }
-
-        /* Decoración de esquinas vintage */
-        .decoracion-esquina {
+        /* Esquinas ornamentales */
+        .ornament {
             position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--marron-suave);
-            opacity: 0.6;
+            font-size: 1.2rem;
+            color: var(--color-accent-gold);
+            opacity: 0.8;
+            z-index: 10;
         }
-        .esquina-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
-        .esquina-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
-        .esquina-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
-        .esquina-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+        .ornament-tl { top: 15px; left: 15px; }
+        .ornament-tr { top: 15px; right: 15px; transform: rotate(90deg); }
+        .ornament-bl { bottom: 15px; left: 15px; transform: rotate(-90deg); }
+        .ornament-br { bottom: 15px; right: 15px; transform: rotate(180deg); }
 
-        /* =========================================
-           CABECERA Y TEXTOS
-           ========================================= */
-        .cabecera-editorial {
+        /* ==========================================
+           CABECERA Y TIPOGRAFÍA EDITORIAL
+           ========================================== */
+        .header-section {
             text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-title {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--color-accent-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            color: var(--color-text-main);
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Separador decorativo vintage */
+        .divider-vintage {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            color: var(--color-accent-gold);
+            opacity: 0.7;
+        }
+        
+        .divider-vintage::before,
+        .divider-vintage::after {
+            content: "";
+            height: 1px;
+            width: 100px;
+            background-color: var(--color-accent-gold);
+            margin: 0 15px;
+        }
+
+        /* Letra Capital para la introducción */
+        .intro-text {
+            color: var(--color-text-muted);
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin: 0 auto;
+            text-align: justify;
+        }
+
+        .intro-text::first-letter {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            float: left;
+            line-height: 0.8;
+            padding-right: 8px;
+            padding-top: 4px;
+            color: var(--color-accent-gold);
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+        }
+
+        /* ==========================================
+           SECCIÓN DE VOTACIÓN (FORMULARIO ESTÉTICO)
+           ========================================== */
+        .poll-question {
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--color-accent-green);
+            font-style: italic;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
             margin-bottom: 2.5rem;
         }
 
-        .adorno-floral {
-            color: var(--dorado-opaco);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 5px;
-            user-select: none;
-        }
-
-        .titulo-principal {
-            font-family: var(--fuente-titulos);
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--negro-tinta);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            line-height: 1.2;
-        }
-
-        .explicacion-actividad {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #4a4745;
-            max-width: 650px;
-            margin: 0 auto;
-            font-style: italic;
-        }
-
-        /* =========================================
-           ZONA INTERACTIVA (GRID)
-           ========================================= */
-        .zona-interactiva {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            margin-top: 2rem;
-            border-top: 1px dashed var(--marron-suave);
-            padding-top: 2.5rem;
-        }
-
-        /* ----- Lado Izquierdo: Voto Rápido ----- */
-        .bloque-voto {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .pregunta-voto {
-            font-family: var(--fuente-titulos);
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--negro-tinta);
-            border-left: 4px solid var(--verde-oliva);
-            padding-left: 1rem;
-        }
-
-        .botones-voto {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-elegante {
-            font-family: var(--fuente-cuerpo);
-            background-color: transparent;
-            color: var(--negro-tinta);
-            border: 1px solid var(--marron-suave);
-            padding: 0.8rem 1.5rem;
-            font-size: 1rem;
+        .option-card {
+            border: 1px solid var(--color-border-light);
+            border-left: 4px solid var(--color-accent-gold); /* Efecto marcador de libro */
+            border-radius: 4px 8px 8px 4px;
+            padding: 1.5rem;
             cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, #ffffff 0%, rgba(255,255,255,0) 100%);
+            background-color: var(--color-bg-main);
             position: relative;
             overflow: hidden;
-            z-index: 1;
-            flex: 1;
-            min-width: 120px;
-            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            /* Animación de cascada inicial */
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeInUp 0.6s forwards;
         }
 
-        /* Efecto hover llenando el botón */
-        .btn-elegante::before {
-            content: "";
+        .option-card:nth-child(1) { animation-delay: 0.1s; }
+        .option-card:nth-child(2) { animation-delay: 0.2s; }
+        .option-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .option-card:hover {
+            border-color: var(--color-accent-gold);
+            transform: translateX(5px) translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            background-color: #fff;
+        }
+
+        /* Ícono decorativo de fondo en la tarjeta */
+        .option-icon-bg {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--verde-oliva);
-            z-index: -1;
-            transform: scaleY(0);
-            transform-origin: bottom;
-            transition: transform 0.3s ease;
+            right: -10px;
+            bottom: -15px;
+            font-size: 4rem;
+            color: var(--color-accent-gold);
+            opacity: 0.05;
+            transition: var(--transition-smooth);
         }
 
-        .btn-elegante:hover::before {
-            transform: scaleY(1);
+        .option-card:hover .option-icon-bg {
+            transform: scale(1.1) rotate(-10deg);
+            opacity: 0.1;
         }
 
-        .btn-elegante:hover {
-            color: var(--blanco-roto);
-            border-color: var(--verde-oliva);
-        }
-
-        .mensaje-agradecimiento {
+        .option-card input[type="radio"] {
             display: none;
-            color: var(--verde-oliva);
-            font-style: italic;
-            font-size: 0.95rem;
-            animation: fadeIn 0.5s ease forwards;
         }
 
-        /* ----- Lado Derecho: Código QR ----- */
-        .bloque-qr {
+        .custom-radio {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            margin-right: 20px;
+            display: inline-block;
+            position: relative;
+            flex-shrink: 0;
+            transition: var(--transition-smooth);
+            background-color: #fff;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .option-card input[type="radio"]:checked + .custom-radio {
+            border-color: var(--color-accent-gold);
+        }
+
+        .option-card input[type="radio"]:checked + .custom-radio::after {
+            content: "\f00c"; /* Check de FontAwesome */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--color-accent-gold);
+            font-size: 12px;
+        }
+
+        .option-content {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            text-align: center;
+            gap: 15px;
+            width: 100%;
         }
 
-        .marco-qr {
-            background-color: var(--blanco-roto);
-            padding: 1rem;
-            border: 2px solid var(--dorado-opaco);
-            border-radius: 8px;
-            box-shadow: 0 4px 10px var(--sombra-ligera);
-            margin-bottom: 1rem;
-            transition: transform 0.3s ease;
+        .option-icon {
+            font-size: 1.5rem;
+            color: var(--color-accent-green);
+            opacity: 0.7;
+            transition: var(--transition-smooth);
+        }
+
+        .option-card input[type="radio"]:checked ~ .option-content .option-icon {
+            opacity: 1;
+            color: var(--color-accent-gold);
+        }
+
+        .option-text {
+            font-size: 1.15rem;
+            color: var(--color-text-main);
+            transition: var(--transition-smooth);
+            line-height: 1.5;
+        }
+
+        .option-card input[type="radio"]:checked ~ .option-content .option-text {
+            font-weight: 500;
+            color: var(--color-text-main);
+        }
+
+        /* Área de opinión con estilo de pergamino */
+        .opinion-group {
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s forwards;
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+
+        .opinion-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.8rem;
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: var(--color-accent-green);
+        }
+
+        .opinion-input-wrapper {
             position: relative;
         }
 
-        .marco-qr:hover {
-            transform: scale(1.05);
-        }
-
-        /* Falso código QR dibujado con CSS/SVG para ilustrar */
-        .imagen-qr {
-            width: 140px;
-            height: 140px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .imagen-qr svg {
+        .opinion-input {
             width: 100%;
+            padding: 1.2rem;
+            padding-left: 3rem; /* Espacio para el ícono de la pluma */
+            border: 1px dashed var(--color-border);
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.5);
+            font-family: var(--font-body);
+            color: var(--color-text-main);
+            font-size: 1.05rem;
+            resize: vertical;
+            min-height: 120px;
+            transition: var(--transition-smooth);
+            background-image: repeating-linear-gradient(transparent, transparent 31px, var(--color-border-light) 31px, var(--color-border-light) 32px);
+            line-height: 32px; /* Alineado con las líneas de fondo */
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 1.2rem;
+            left: 1rem;
+            color: var(--color-accent-gold);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .opinion-input:focus {
+            outline: none;
+            border-color: var(--color-accent-gold);
+            border-style: solid;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(194, 155, 87, 0.1);
+        }
+
+        /* Interfaz Centrada y Botón Creativo */
+        .action-area {
+            display: flex;
+            justify-content: center; /* Centrado absoluto ya que no hay QR */
+            align-items: center;
+            margin-top: 1rem;
+            animation: fadeInUp 0.6s forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--color-accent-green) 0%, #3e4435 100%);
+            color: #fff;
+            border: 2px solid #3e4435;
+            padding: 1rem 3rem;
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            border-radius: 50px; /* Forma de píldora elegante */
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            box-shadow: 0 6px 20px rgba(92, 99, 79, 0.3), inset 0 2px 0 rgba(255,255,255,0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            transition: 0.5s;
+        }
+
+        .btn-submit:hover::before {
+            left: 150%;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(92, 99, 79, 0.4);
+            border-color: var(--color-accent-gold);
+            color: var(--color-accent-gold);
+        }
+
+        /* ==========================================
+           SECCIÓN DE RESULTADOS
+           ========================================== */
+        #results-section {
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .results-title {
+            font-size: 2.2rem;
+            color: var(--color-accent-green);
+            font-style: italic;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .result-bar-container {
+            margin-bottom: 2rem;
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--color-border-light);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .result-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .result-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        .result-percentage {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: var(--color-accent-gold);
+            font-weight: 700;
+        }
+
+        .result-bar-bg {
+            width: 100%;
+            height: 8px; /* Más fina y elegante */
+            background-color: var(--color-border-light);
+            border-radius: 10px;
+            overflow: visible; /* Permitir que íconos sobresalgan */
+            position: relative;
+        }
+
+        .result-bar-fill {
             height: 100%;
-            fill: var(--negro-tinta);
+            background: linear-gradient(90deg, var(--color-accent-gold) 0%, #dfbf88 100%);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            box-shadow: 0 2px 5px rgba(194, 155, 87, 0.3);
         }
 
-        .texto-apoyo-qr {
+        /* Tarjetas de Opiniones (Muro) */
+        .opinions-board {
+            margin-top: 4rem;
+            border-top: 1px dashed var(--color-accent-gold);
+            padding-top: 3rem;
+            position: relative;
+        }
+
+        .opinions-board::before {
+            content: "\f02d"; /* Icono de libro */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--color-bg-card);
+            padding: 0 15px;
+            color: var(--color-accent-gold);
+            font-size: 1.5rem;
+        }
+
+        .opinions-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--color-text-main);
+        }
+
+        .opinions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .opinion-card-display {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 4px 15px 15px 15px;
+            box-shadow: var(--shadow-delicate);
+            position: relative;
+            border: 1px solid var(--color-border-light);
+            transition: var(--transition-smooth);
+        }
+
+        .opinion-card-display:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .opinion-card-display::before {
+            content: "\f10d"; /* Comillas FA */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            color: #fff;
+            background-color: var(--color-accent-gold);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
             font-size: 0.9rem;
-            color: #555;
-            max-width: 250px;
+            box-shadow: 0 4px 10px rgba(194, 155, 87, 0.4);
         }
 
-        .texto-apoyo-qr strong {
-            color: var(--marron-suave);
-            font-family: var(--fuente-titulos);
+        .opinion-text-display {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--color-text-muted);
+            line-height: 1.6;
         }
 
-        /* =========================================
-           ANIMACIONES Y RESPONSIVE
-           ========================================= */
+        .opinion-author {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--color-accent-green);
+            text-align: right;
+            border-top: 1px solid var(--color-border-light);
+            padding-top: 0.8rem;
+        }
+
+        .btn-restart {
+            display: block;
+            margin: 4rem auto 0;
+            background: transparent;
+            border: 1px solid var(--color-accent-gold);
+            color: var(--color-accent-gold);
+            padding: 0.8rem 2.5rem;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-restart:hover {
+            background-color: var(--color-accent-gold);
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(194, 155, 87, 0.3);
+        }
+
+        /* Animaciones */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Adaptación para dispositivos móviles */
+        /* ==========================================
+           RESPONSIVE DESIGN
+           ========================================== */
         @media (max-width: 768px) {
-            .zona-interactiva {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-            
-            .titulo-principal {
-                font-size: 2rem;
-            }
-            
-            .seccion-vintage {
-                padding: 2.5rem 1.5rem;
-            }
-            
-            .bloque-qr {
-                border-top: 1px dotted var(--marron-suave);
-                padding-top: 2rem;
-            }
+            .editorial-container { padding: 3rem 2rem; }
+            .main-title { font-size: 2.5rem; }
+            .btn-submit { width: 100%; padding: 1rem; }
+        }
+        @media (max-width: 480px) {
+            .editorial-container { padding: 2rem 1.5rem; }
+            .main-title { font-size: 2rem; }
+            .project-title { font-size: 0.8rem; letter-spacing: 2px; }
+            .opinion-card-display { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- CONTENEDOR PRINCIPAL -->
-    <section class="seccion-vintage">
-        <!-- Elementos decorativos en las esquinas -->
-        <div class="decoracion-esquina esquina-tl"></div>
-        <div class="decoracion-esquina esquina-tr"></div>
-        <div class="decoracion-esquina esquina-bl"></div>
-        <div class="decoracion-esquina esquina-br"></div>
+    <article class="editorial-container">
+        <!-- Esquinas Decorativas -->
+        <i class="fa-solid fa-leaf ornament ornament-tl"></i>
+        <i class="fa-solid fa-leaf ornament ornament-tr"></i>
+        <i class="fa-solid fa-leaf ornament ornament-bl"></i>
+        <i class="fa-solid fa-leaf ornament ornament-br"></i>
 
-        <!-- Cabecera -->
-        <header class="cabecera-editorial">
-            <div class="adorno-floral">~ ✧ ~</div>
-            <h2 class="titulo-principal">El Juicio del Tiempo:<br>La Moraleja a Debate</h2>
-            <p class="explicacion-actividad">
-                Toda fábula encierra una verdad que busca trascender, pero ¿soporta verdaderamente el paso de los siglos? Te invitamos a reflexionar sobre la enseñanza de esta historia. Analiza sus palabras y ayúdanos a decidir el veredicto final.
+        <!-- CABECERA -->
+        <header class="header-section">
+            <div class="project-title">
+                <i class="fa-solid fa-feather-pointed"></i> Ecos de Papel <i class="fa-solid fa-feather-pointed"></i>
+            </div>
+            <h1 class="main-title">La Cigarra y la Hormiga</h1>
+            <div class="divider-vintage"><i class="fa-solid fa-book-open"></i></div>
+            <p class="intro-text">
+                Un espacio para reflexionar sobre las fábulas clásicas bajo una mirada contemporánea. Las moralejas evolucionan con el tiempo, al igual que nuestra forma de ver el mundo. Sumérgete en estas páginas y deja grabada tu perspectiva en la tinta digital.
             </p>
         </header>
 
-        <!-- Zona de Interactividad -->
-        <div class="zona-interactiva">
+        <!-- SECCIÓN DE FORMULARIO DE VOTACIÓN -->
+        <section id="poll-section">
+            <h2 class="poll-question">¿Cuál crees que es la lección más valiosa de esta fábula hoy en día?</h2>
             
-            <!-- Columna Izquierda: Mini Encuesta en vivo -->
-            <div class="bloque-voto">
-                <h3 class="pregunta-voto">¿Consideras que esta moraleja sigue siendo aplicable en nuestra sociedad actual?</h3>
-                <div class="botones-voto" id="contenedor-botones">
-                    <button class="btn-elegante" onclick="registrarVoto('si')">Sí, es atemporal</button>
-                    <button class="btn-elegante" onclick="registrarVoto('no')">No, ha caducado</button>
-                </div>
-                <!-- Mensaje que aparece tras votar -->
-                <p class="mensaje-agradecimiento" id="mensaje-gracias">
-                    ¡Gracias por tu perspectiva! Tu voto ha quedado registrado en los archivos del tiempo.
-                </p>
-            </div>
+            <form id="vintage-poll-form">
+                <div class="options-grid">
+                    <!-- Opción 1 -->
+                    <label class="option-card">
+                        <i class="fa-solid fa-wheat-awn option-icon-bg"></i>
+                        <input type="radio" name="fable_vote" value="0" required>
+                        <span class="custom-radio"></span>
+                        <div class="option-content">
+                            <i class="fa-solid fa-seedling option-icon"></i>
+                            <span class="option-text">El trabajo duro, la constancia y la preparación siempre rinden frutos a largo plazo.</span>
+                        </div>
+                    </label>
+                    
+                    <!-- Opción 2 -->
+                    <label class="option-card">
+                        <i class="fa-solid fa-scale-unbalanced option-icon-bg"></i>
+                        <input type="radio" name="fable_vote" value="1">
+                        <span class="custom-radio"></span>
+                        <div class="option-content">
+                            <i class="fa-solid fa-scale-balanced option-icon"></i>
+                            <span class="option-text">Es vital encontrar un equilibrio sano entre el arte de disfrutar el presente y planificar el futuro.</span>
+                        </div>
+                    </label>
 
-            <!-- Columna Derecha: Código QR -->
-            <div class="bloque-qr">
-                <div class="marco-qr">
-                    <div class="imagen-qr">
-                        <!-- SVG simulando un código QR elegante. 
-                             Para producción, reemplaza este SVG por una etiqueta <img> con tu QR real -->
-                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="10" y="10" width="25" height="25" fill="none" stroke="currentColor" stroke-width="3"/>
-                            <rect x="15" y="15" width="15" height="15"/>
-                            <rect x="65" y="10" width="25" height="25" fill="none" stroke="currentColor" stroke-width="3"/>
-                            <rect x="70" y="15" width="15" height="15"/>
-                            <rect x="10" y="65" width="25" height="25" fill="none" stroke="currentColor" stroke-width="3"/>
-                            <rect x="15" y="70" width="15" height="15"/>
-                            <rect x="45" y="10" width="10" height="10"/>
-                            <rect x="45" y="25" width="10" height="10"/>
-                            <rect x="10" y="45" width="10" height="10"/>
-                            <rect x="25" y="45" width="10" height="10"/>
-                            <rect x="40" y="45" width="20" height="20"/>
-                            <rect x="65" y="45" width="10" height="10"/>
-                            <rect x="80" y="45" width="10" height="10"/>
-                            <rect x="45" y="70" width="10" height="10"/>
-                            <rect x="45" y="85" width="10" height="10"/>
-                            <rect x="60" y="65" width="30" height="10"/>
-                            <rect x="60" y="80" width="10" height="10"/>
-                            <rect x="80" y="80" width="10" height="10"/>
-                        </svg>
+                    <!-- Opción 3 -->
+                    <label class="option-card">
+                        <i class="fa-solid fa-heart option-icon-bg"></i>
+                        <input type="radio" name="fable_vote" value="2">
+                        <span class="custom-radio"></span>
+                        <div class="option-content">
+                            <i class="fa-solid fa-hand-holding-heart option-icon"></i>
+                            <span class="option-text">La empatía es clave; la hormiga debió ser compasiva y compartir con quien la hizo cantar en verano.</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="opinion-group">
+                    <label for="user-opinion" class="opinion-label">
+                        <i class="fa-solid fa-ink-nut"></i> Comparte tu propio pensamiento (Opcional)
+                    </label>
+                    <div class="opinion-input-wrapper">
+                        <i class="fa-solid fa-pen-nib input-icon"></i>
+                        <textarea id="user-opinion" class="opinion-input" placeholder="Escribe aquí tu reflexión con pluma y tinta digital..."></textarea>
                     </div>
                 </div>
-                <p class="texto-apoyo-qr">
-                    <strong>Veredicto Completo:</strong> Escanea el sello para participar en nuestra encuesta extendida y dejar tu opinión detallada.
-                </p>
+
+                <!-- Botón Centrado, QR Eliminado -->
+                <div class="action-area">
+                    <button type="submit" class="btn-submit">
+                        <i class="fa-solid fa-stamp"></i> Sellar mi Voto en la Historia
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- SECCIÓN DE RESULTADOS -->
+        <section id="results-section">
+            <div class="results-header">
+                <h2 class="results-title"><i class="fa-solid fa-scroll"></i> El Veredicto del Público</h2>
+                <p style="color: var(--color-text-muted); font-style: italic;">Así piensan los lectores de esta época.</p>
+            </div>
+            
+            <div id="bars-container">
+                <!-- Las barras se generarán dinámicamente con JavaScript -->
             </div>
 
-        </div>
-    </section>
+            <div class="opinions-board">
+                <h3 class="opinions-title">Ecos y Reflexiones Recientes</h3>
+                <div class="opinions-grid" id="opinions-container">
+                    <!-- Las opiniones se agregarán aquí -->
+                </div>
+            </div>
 
-    <!-- LOGICA JAVASCRIPT -->
+            <button type="button" class="btn-restart" onclick="resetPoll()">
+                <i class="fa-solid fa-rotate-left" style="margin-right: 8px;"></i> Volver a leer la fábula
+            </button>
+        </section>
+
+    </article>
+
+    <!-- SCRIPT DE FUNCIONALIDAD -->
     <script>
-        /**
-         * Función sencilla para simular la interacción del voto
-         * Oculta los botones y muestra un mensaje de agradecimiento clásico.
-         */
-        function registrarVoto(respuesta) {
-            const contenedorBotones = document.getElementById('contenedor-botones');
-            const mensajeGracias = document.getElementById('mensaje-gracias');
+        // --- DATOS SIMULADOS INICIALES ---
+        const pollData = [
+            { text: "El trabajo rinde frutos.", icon: "fa-seedling", votes: 45 },
+            { text: "Equilibrio entre disfrutar y planificar.", icon: "fa-scale-balanced", votes: 82 },
+            { text: "La empatía es clave; debió ayudar.", icon: "fa-hand-holding-heart", votes: 34 }
+        ];
 
-            // Efecto visual: desvanecer botones
-            contenedorBotones.style.opacity = '0';
-            contenedorBotones.style.transition = 'opacity 0.4s ease';
+        // Opiniones simuladas previas
+        const opinionsData = [
+            { text: "Siempre me enseñaron a ser hormiga, pero hoy creo que el arte de la cigarra (la música y la alegría) también alimenta el alma y es necesario en el mundo.", author: "Lector Anónimo" },
+            { text: "La hormiga fue egoísta. En una sociedad moderna, debemos protegernos mutuamente en los tiempos de invierno.", author: "Estudiante de Letras" }
+        ];
 
+        // --- REFERENCIAS AL DOM ---
+        const form = document.getElementById('vintage-poll-form');
+        const pollSection = document.getElementById('poll-section');
+        const resultsSection = document.getElementById('results-section');
+        const barsContainer = document.getElementById('bars-container');
+        const opinionsContainer = document.getElementById('opinions-container');
+
+        // --- LÓGICA PRINCIPAL ---
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            // 1. Obtener la opción votada
+            const selectedOption = document.querySelector('input[name="fable_vote"]:checked').value;
+            
+            // 2. Incrementar el voto de la opción seleccionada
+            pollData[selectedOption].votes += 1;
+
+            // 3. Obtener la opinión (si la escribió)
+            const userText = document.getElementById('user-opinion').value.trim();
+            if(userText !== "") {
+                opinionsData.unshift({
+                    text: userText,
+                    author: "Nuevo Lector"
+                });
+            }
+
+            // 4. Cambiar vista y renderizar resultados
+            showResults();
+        });
+
+        function showResults() {
+            // Animación de salida del formulario
+            pollSection.style.opacity = '0';
+            
             setTimeout(() => {
-                contenedorBotones.style.display = 'none';
+                pollSection.style.display = 'none';
+                resultsSection.style.display = 'block';
+                // Reset opacity para cuando se vuelva a abrir
+                pollSection.style.opacity = '1';
+
+                // Calcular total de votos
+                const totalVotes = pollData.reduce((acc, curr) => acc + curr.votes, 0);
+
+                // Renderizar Barras
+                barsContainer.innerHTML = ''; 
+                pollData.forEach((option, index) => {
+                    const percentage = totalVotes === 0 ? 0 : Math.round((option.votes / totalVotes) * 100);
+                    
+                    // Crear HTML de la barra con iconos
+                    const barHTML = `
+                        <div class="result-bar-container" style="animation: fadeInUp 0.5s ease forwards; animation-delay: ${index * 0.15}s; opacity: 0;">
+                            <div class="result-info">
+                                <span class="result-text"><i class="fa-solid ${option.icon}" style="color: var(--color-accent-green);"></i> ${option.text}</span>
+                                <span class="result-percentage">${percentage}%</span>
+                            </div>
+                            <div class="result-bar-bg">
+                                <div class="result-bar-fill" id="bar-${index}"></div>
+                            </div>
+                            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 5px; text-align: right;">
+                                ${option.votes} votos
+                            </div>
+                        </div>
+                    `;
+                    barsContainer.insertAdjacentHTML('beforeend', barHTML);
+
+                    // Animar el ancho de la barra
+                    setTimeout(() => {
+                        document.getElementById(`bar-${index}`).style.width = `${percentage}%`;
+                    }, 300 + (index * 150));
+                });
+
+                // Renderizar Opiniones (Máximo las 4 más recientes)
+                opinionsContainer.innerHTML = ''; 
+                const displayOpinions = opinionsData.slice(0, 4);
                 
-                // Si deseas enviar los datos a algún lugar, aquí podrías añadir lógica fetch/AJAX
-                // console.log("El usuario votó:", respuesta);
-                
-                // Mostrar el mensaje
-                mensajeGracias.style.display = 'block';
-            }, 400);
+                displayOpinions.forEach((opinion, index) => {
+                    const opinionHTML = `
+                        <div class="opinion-card-display" style="animation: fadeInUp 0.5s ease forwards; animation-delay: ${(index * 0.1) + 0.6}s; opacity: 0;">
+                            <p class="opinion-text-display">"${opinion.text}"</p>
+                            <p class="opinion-author">✒️ ${opinion.author}</p>
+                        </div>
+                    `;
+                    opinionsContainer.insertAdjacentHTML('beforeend', opinionHTML);
+                });
+            }, 400); // Esperar a que desvanezca el formulario
+        }
+
+        // Función para volver al estado inicial
+        function resetPoll() {
+            form.reset();
+            resultsSection.style.display = 'none';
+            pollSection.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
-
 </body>
 </html>
